@@ -92,13 +92,42 @@
             font-size: 22px;
             color: #e74c3c;
             font-weight: 900;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             background: #fceeea;
             padding: 5px 10px;
             border-radius: 8px;
             display: inline-block;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* Desain Pemilihan Jumlah (Pcs) */
+        .qty-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .qty-wrapper label {
+            font-size: 15px;
+            color: #34495e;
+            font-weight: bold;
+        }
+        .qty-input {
+            width: 60px;
+            padding: 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .qty-input:focus {
+            border-color: #38ef7d;
         }
 
         /* Tombol Pesan */
@@ -116,6 +145,10 @@
             font-size: 16px;
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: auto;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            width: 100%;
         }
         .btn-pesan:hover {
             transform: scale(1.05);
@@ -152,7 +185,7 @@
 </head>
 <body>
 
-    <!-- Bagian Header / Spanduk Atas -->
+    <!-- Bagian Header -->
     <div class="header">
         <h1>✨ ATHASHOP ✨</h1>
         <p>Pilihan Tepat, Belanja Cepat, Harga Bersahabat</p>
@@ -163,56 +196,114 @@
         
         <!-- Produk 1 -->
         <div class="card">
-            <!-- Ganti src="..." dengan nama gambar aslimu -->
             <img src="download.webp" alt="Kopi Robusta">
             <div class="card-content">
                 <div class="product-name">Kopi Robusta</div>
                 <div class="product-price">Rp 20.000</div>
-                <a href="https://wa.me/6285791175583" class="btn-pesan" target="_blank">
+                
+                <!-- Pilihan Jumlah -->
+                <div class="qty-wrapper">
+                    <label for="qty-kopi">Jumlah (pcs):</label>
+                    <input type="number" id="qty-kopi" class="qty-input" value="1" min="1">
+                </div>
+
+                <!-- Tombol menggunakan JavaScript -->
+                <button onclick="pesanSekarang('Kopi Robusta', 20000, 'qty-kopi')" class="btn-pesan">
                     Pesan via WA
-                </a>
+                </button>
             </div>
         </div>
 
         <!-- Produk 2 -->
         <div class="card">
-            <!-- Ganti src="..." dengan nama gambar aslimu -->
             <img src="images (1) (21).jpeg" alt="Kelomang">
             <div class="card-content">
                 <div class="product-name">Kelomang</div>
                 <div class="product-price">Rp 225.000</div>
-                <a href="https://wa.me/6285791175583" class="btn-pesan" target="_blank">
+                
+                <!-- Pilihan Jumlah -->
+                <div class="qty-wrapper">
+                    <label for="qty-kelomang">Jumlah (pcs):</label>
+                    <input type="number" id="qty-kelomang" class="qty-input" value="1" min="1">
+                </div>
+
+                <!-- Tombol menggunakan JavaScript -->
+                <button onclick="pesanSekarang('Kelomang', 225000, 'qty-kelomang')" class="btn-pesan">
                     Pesan via WA
-                </a>
+                </button>
             </div>
         </div>
 
         <!-- Produk 3 -->
         <div class="card">
-            <!-- Ganti src="..." dengan nama gambar aslimu -->
             <img src="images (1) (22).jpeg" alt="Boti">
             <div class="card-content">
                 <div class="product-name">Boti</div>
                 <div class="product-price">Rp 1.000.000</div>
-                <a href="https://wa.me/6285791175583" class="btn-pesan" target="_blank">
+                
+                <!-- Pilihan Jumlah -->
+                <div class="qty-wrapper">
+                    <label for="qty-boti">Jumlah (pcs):</label>
+                    <input type="number" id="qty-boti" class="qty-input" value="1" min="1">
+                </div>
+
+                <!-- Tombol menggunakan JavaScript -->
+                <button onclick="pesanSekarang('Boti', 1000000, 'qty-boti')" class="btn-pesan">
                     Pesan via WA
-                </a>
+                </button>
             </div>
         </div>
 
     </div>
 
-    <!-- Bagian Footer / Kaki Halaman -->
+    <!-- Bagian Footer -->
     <div class="footer">
         <h3>ATHASHOP</h3>
         <p>Buka Setiap Hari | Pengiriman Seluruh Indonesia</p>
         <p>Hubungi Kami: 0857-9117-5583</p>
         <div class="copyright">
-            &copy; 2026 ATHASHOP : MUHAMMAD ATHA HIBRIZI HIBATULLAH (X RPL-1/20)<br>
-            TOKO TERBAIK SEPANJANG MASA
+            &copy; 2026 ATHASHOP. MUHAMMAD ATHA HIBRIZI HIBATULLAH (X RPL-1/20)<br>
+            Toko Terbaik Di Dunia...
         </div>
     </div>
 
+    <!-- --- LOGIK JAVASCRIPT UNTUK MENGHITUNG PESANAN --- -->
+    <script>
+        function pesanSekarang(namaProduk, hargaSatuan, idInput) {
+            // Ambil jumlah pcs yang diisi pembeli
+            var jumlah = document.getElementById(idInput).value;
+
+            // Pastikan jumlahnya minimal 1
+            if(jumlah < 1) {
+                alert("Jumlah pesanan minimal 1 pcs ya!");
+                return;
+            }
+
+            // Hitung total harga
+            var totalHarga = hargaSatuan * jumlah;
+
+            // Format angka ke format Rupiah biar cantik
+            var formatHargaSatuan = "Rp " + hargaSatuan.toLocaleString('id-ID');
+            var formatTotal = "Rp " + totalHarga.toLocaleString('id-ID');
+
+            // Nomor WA Tujuan
+            var nomorWA = "6285791175583";
+
+            // Susun isi pesan WA-nya
+            var pesan = "Halo ATHASHOP, saya ingin pesan barang berikut:\n\n" +
+                        "🛍️ *Produk:* " + namaProduk + "\n" +
+                        "📦 *Jumlah:* " + jumlah + " pcs\n" +
+                        "💵 *Harga Satuan:* " + formatHargaSatuan + "\n" +
+                        "💰 *Total Harga:* *" + formatTotal + "*\n\n" +
+                        "Apakah stoknya masih tersedia?";
+
+            // Ubah pesan ke format link URL
+            var urlWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
+
+            // Buka WhatsApp di tab baru
+            window.open(urlWA, '_blank');
+        }
+    </script>
+
 </body>
 </html>
-
