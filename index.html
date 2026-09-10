@@ -303,25 +303,7 @@
             // Buka WhatsApp di tab baru
             window.open(urlWA, '_blank');
         }
-        let cart = [];
-function tambah(nama, harga) {
-    let item = cart.find(p => p.nama === nama);
-    if(item) item.jml++; else cart.push({nama, harga, jml: 1});
-    let totalItem = cart.reduce((a, b) => a + b.jml, 0);
-    let totalHarga = cart.reduce((a, b) => a + (b.harga * b.jml), 0);
-    document.getElementById('info').innerText = `Keranjang: ${totalItem} item (Rp ${totalHarga.toLocaleString('id-ID')})`;
-}
-function pesanWA() {
-    if(cart.length === 0) return alert("Keranjang kosong!");
-    let txt = "Halo ATHASHOP, saya ingin pesan:\n";
-    let total = 0;
-    cart.forEach(i => {
-        txt += `- ${i.nama} (${i.jml} pcs) - Rp ${(i.harga*i.jml).toLocaleString('id-ID')}\n`;
-        total += i.harga * i.jml;
-    });
-    txt += `\nTotal: Rp ${total.toLocaleString('id-ID')}`;
-    window.open(`https://wa.me/6285791175583?text=${encodeURIComponent(txt)}`, '_blank');
-}
+     
         
     </script>
 
